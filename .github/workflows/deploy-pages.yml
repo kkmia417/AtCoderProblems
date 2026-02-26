@@ -31,11 +31,6 @@ jobs:
           cache: yarn
           cache-dependency-path: atcoder-problems-frontend/yarn.lock
 
-      - name: Setup mdBook
-        uses: peaceiris/actions-mdbook@v2
-        with:
-          mdbook-version: latest
-
       - name: Install dependencies
         working-directory: atcoder-problems-frontend
         run: yarn --frozen-lockfile
@@ -43,10 +38,11 @@ jobs:
       - name: Build
         working-directory: atcoder-problems-frontend
         env:
+          CI: false
           PUBLIC_URL: /${{ github.event.repository.name }}
           REACT_APP_INTERNAL_API_URL: https://kenkoooo.com/atcoder/internal-api
           REACT_APP_ATCODER_API_URL: https://kenkoooo.com/atcoder/atcoder-api
-        run: yarn build
+        run: npx react-scripts build
 
       - name: Disable Jekyll
         run: touch atcoder-problems-frontend/build/.nojekyll
