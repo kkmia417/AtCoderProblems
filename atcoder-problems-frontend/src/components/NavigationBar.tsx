@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink as RouterLink, Route } from "react-router-dom";
+import { NavLink as RouterLink, Route, useLocation } from "react-router-dom";
 import {
   Collapse,
   DropdownItem,
@@ -25,10 +25,16 @@ export const NavigationBar = () => {
   const isLoggedIn = UserState.isLoggedIn(loginState);
   const loggedInUserId = UserState.loggedInUserId(loginState) ?? "";
   const loginLink = useLoginLink();
+  const location = useLocation();
 
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [isNavigationFixed, setIsNavigationFixed] = useState(true);
+  const closeNavbar = () => setIsOpen(false);
+
+  React.useEffect(() => {
+    closeNavbar();
+  }, [location.pathname]);
 
   return (
     <div className={isNavigationFixed ? "sticky-top" : ""}>
@@ -42,7 +48,7 @@ export const NavigationBar = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink tag={RouterLink} to="/table/">
+              <NavLink tag={RouterLink} to="/table/" onClick={closeNavbar}>
                 Problems
               </NavLink>
             </NavItem>
@@ -52,32 +58,40 @@ export const NavigationBar = () => {
                 Rankings
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem tag={RouterLink} to="/ac">
+                <DropdownItem tag={RouterLink} to="/ac" onClick={closeNavbar}>
                   AC Count
                 </DropdownItem>
-                <DropdownItem tag={RouterLink} to="/fast">
+                <DropdownItem tag={RouterLink} to="/fast" onClick={closeNavbar}>
                   Fastest Submissions
                 </DropdownItem>
-                <DropdownItem tag={RouterLink} to="/short">
+                <DropdownItem tag={RouterLink} to="/short" onClick={closeNavbar}>
                   Shortest Submissions
                 </DropdownItem>
-                <DropdownItem tag={RouterLink} to="/first">
+                <DropdownItem tag={RouterLink} to="/first" onClick={closeNavbar}>
                   First AC
                 </DropdownItem>
-                <DropdownItem tag={RouterLink} to="/sum">
+                <DropdownItem tag={RouterLink} to="/sum" onClick={closeNavbar}>
                   Rated Point Ranking
                 </DropdownItem>
-                <DropdownItem tag={RouterLink} to="/streak">
+                <DropdownItem
+                  tag={RouterLink}
+                  to="/streak"
+                  onClick={closeNavbar}
+                >
                   Streak Ranking
                 </DropdownItem>
-                <DropdownItem tag={RouterLink} to="/lang">
+                <DropdownItem tag={RouterLink} to="/lang" onClick={closeNavbar}>
                   Language Owners
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
 
             <NavItem>
-              <NavLink tag={RouterLink} to="/submissions/recent">
+              <NavLink
+                tag={RouterLink}
+                to="/submissions/recent"
+                onClick={closeNavbar}
+              >
                 Submissions
               </NavLink>
             </NavItem>
@@ -87,6 +101,7 @@ export const NavigationBar = () => {
                 href="https://github.com/kenkoooo/AtCoderProblems/tree/master/doc"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={closeNavbar}
               >
                 FAQ
               </NavLink>
@@ -97,6 +112,7 @@ export const NavigationBar = () => {
                 href="https://kenkoooo.com/atcoder/book/index.html"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={closeNavbar}
               >
                 User Guide
               </NavLink>
@@ -112,6 +128,7 @@ export const NavigationBar = () => {
                   href="https://atcoder.jp/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={closeNavbar}
                 >
                   AtCoder
                 </DropdownItem>
@@ -120,6 +137,7 @@ export const NavigationBar = () => {
                   href="http://aoj-icpc.ichyo.jp/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={closeNavbar}
                 >
                   AOJ-ICPC
                 </DropdownItem>
@@ -128,6 +146,7 @@ export const NavigationBar = () => {
                   href="https://github.com/kenkoooo/AtCoderProblems"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={closeNavbar}
                 >
                   GitHub
                 </DropdownItem>
@@ -136,6 +155,7 @@ export const NavigationBar = () => {
                   href="https://twitter.com/kenkoooo"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={closeNavbar}
                 >
                   @kenkoooo
                 </DropdownItem>
@@ -147,6 +167,7 @@ export const NavigationBar = () => {
                 href="https://github.com/sponsors/kenkoooo"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={closeNavbar}
               >
                 Send a tip
               </NavLink>
@@ -157,24 +178,26 @@ export const NavigationBar = () => {
             <ThemeSelector />
 
             <NavItem>
-              <NavLink tag={RouterLink} to="/contest/recent">
+              <NavLink tag={RouterLink} to="/contest/recent" onClick={closeNavbar}>
                 Virtual Contests
               </NavLink>
             </NavItem>
 
             <NavItem>
-              <NavLink tag={RouterLink} to="/training">
+              <NavLink tag={RouterLink} to="/training" onClick={closeNavbar}>
                 Training
               </NavLink>
             </NavItem>
 
             <NavItem>
               {isLoggedIn ? (
-                <NavLink tag={RouterLink} to={ACCOUNT_INFO}>
+                <NavLink tag={RouterLink} to={ACCOUNT_INFO} onClick={closeNavbar}>
                   Account ({loggedInUserId})
                 </NavLink>
               ) : (
-                <NavLink href={loginLink}>Login</NavLink>
+                <NavLink href={loginLink} onClick={closeNavbar}>
+                  Login
+                </NavLink>
               )}
             </NavItem>
           </Nav>
