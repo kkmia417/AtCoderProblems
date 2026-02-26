@@ -64,10 +64,18 @@ export const NavigationBar = () => {
                 <DropdownItem tag={RouterLink} to="/fast" onClick={closeNavbar}>
                   Fastest Submissions
                 </DropdownItem>
-                <DropdownItem tag={RouterLink} to="/short" onClick={closeNavbar}>
+                <DropdownItem
+                  tag={RouterLink}
+                  to="/short"
+                  onClick={closeNavbar}
+                >
                   Shortest Submissions
                 </DropdownItem>
-                <DropdownItem tag={RouterLink} to="/first" onClick={closeNavbar}>
+                <DropdownItem
+                  tag={RouterLink}
+                  to="/first"
+                  onClick={closeNavbar}
+                >
                   First AC
                 </DropdownItem>
                 <DropdownItem tag={RouterLink} to="/sum" onClick={closeNavbar}>
@@ -178,7 +186,11 @@ export const NavigationBar = () => {
             <ThemeSelector />
 
             <NavItem>
-              <NavLink tag={RouterLink} to="/contest/recent" onClick={closeNavbar}>
+              <NavLink
+                tag={RouterLink}
+                to="/contest/recent"
+                onClick={closeNavbar}
+              >
                 Virtual Contests
               </NavLink>
             </NavItem>
@@ -191,7 +203,11 @@ export const NavigationBar = () => {
 
             <NavItem>
               {isLoggedIn ? (
-                <NavLink tag={RouterLink} to={ACCOUNT_INFO} onClick={closeNavbar}>
+                <NavLink
+                  tag={RouterLink}
+                  to={ACCOUNT_INFO}
+                  onClick={closeNavbar}
+                >
                   Account ({loggedInUserId})
                 </NavLink>
               ) : (
