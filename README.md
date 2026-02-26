@@ -11,6 +11,7 @@
 - [Back-end server application](./atcoder-problems-backend/README.md)
 - [API / Datasets](./doc/api.md)
 - [FAQ (en)](./doc/faq_en.md) / [FAQ (ja)](./doc/faq_ja.md)
+- [Fork deployment with login](./doc/fork_deploy.md)
 
 # Useful Commands
 
@@ -44,3 +45,7 @@ If this is your first deployment, enable GitHub Pages in your repository setting
 
 1. Open **Settings > Pages**
 2. Set **Source** to **GitHub Actions**
+
+To enable login on your fork (`github.io` frontend + your own backend), see:
+
+- `doc/fork_deploy.md`

@@ -29,3 +29,4 @@ COPY --from=builder /app/target/release/run_server                  /usr/bin/run
 
 RUN apt-get update && apt-get install -y awscli postgresql-client
 ADD ./scripts/sql-backup.sh /usr/bin/sql-backup.sh
+CMD ["/usr/bin/run_server"]

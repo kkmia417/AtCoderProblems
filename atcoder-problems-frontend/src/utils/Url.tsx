@@ -1,7 +1,9 @@
 const BASE_URL = "https://atcoder.jp";
 
-const CLIENT_ID = "162a5276634fc8b970f7";
+const CLIENT_ID =
+  process.env.REACT_APP_GITHUB_CLIENT_ID ?? "162a5276634fc8b970f7";
 const AUTHORIZATION_CALLBACK_URL =
+  process.env.REACT_APP_AUTHORIZATION_CALLBACK_URL ??
   "https://kenkoooo.com/atcoder/internal-api/authorize";
 
 export const formatContestUrl = (contest: string): string =>

@@ -5,5 +5,7 @@ declare namespace NodeJS {
     PUBLIC_URL: string;
     REACT_APP_INTERNAL_API_URL: string;
     REACT_APP_ATCODER_API_URL: string;
+    REACT_APP_GITHUB_CLIENT_ID: string;
+    REACT_APP_AUTHORIZATION_CALLBACK_URL: string;
   }
 }

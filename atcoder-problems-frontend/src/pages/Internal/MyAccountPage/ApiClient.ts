@@ -3,10 +3,11 @@ import {
   PROGRESS_RESET_DELETE,
   USER_UPDATE,
 } from "../ApiUrl";
+import { fetchInternalApi } from "../../../api/InternalAPIFetch";
 import { getCurrentUnixtimeInSecond } from "../../../utils/DateUtil";
 
 export const addResetProgress = (problemId: string) =>
-  fetch(PROGRESS_RESET_ADD, {
+  fetchInternalApi(PROGRESS_RESET_ADD, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +19,7 @@ export const addResetProgress = (problemId: string) =>
   });
 
 export const deleteResetProgress = (problemId: string) =>
-  fetch(PROGRESS_RESET_DELETE, {
+  fetchInternalApi(PROGRESS_RESET_DELETE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,7 +30,7 @@ export const deleteResetProgress = (problemId: string) =>
   });
 
 export const updateUserInfo = (userId: string) =>
-  fetch(USER_UPDATE, {
+  fetchInternalApi(USER_UPDATE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

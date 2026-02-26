@@ -48,7 +48,10 @@ jobs:
         run: psql ${SQL_URL} < ../config/database-definition.sql
 
       - name: Setup
-        run: rustup component add rustfmt
+        run: |
+          rustup toolchain install 1.69.0 --profile minimal
+          rustup default 1.69.0
+          rustup component add rustfmt
 
       - name: Check format
         run: cargo fmt --all -- --check
@@ -91,7 +94,7 @@ jobs:
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v1.2.0
         with:
-          mdbook-version: "latest"
+          mdbook-version: "0.4.37"
 
       - name: build
         run: yarn build

@@ -5,6 +5,7 @@ import {
   CONTEST_LEAVE,
   CONTEST_UPDATE,
 } from "../ApiUrl";
+import { fetchInternalApi } from "../../../api/InternalAPIFetch";
 import { VirtualContestItem, VirtualContestMode } from "../types";
 
 export interface CreateContestRequest {
@@ -21,7 +22,7 @@ export interface CreateContestResponse {
 }
 
 export const createVirtualContest = (request: CreateContestRequest) =>
-  fetch(CONTEST_CREATE, {
+  fetchInternalApi(CONTEST_CREATE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,7 +43,7 @@ export interface UpdateContestRequest {
   penalty_second: number;
 }
 export const updateVirtualContestInfo = (request: UpdateContestRequest) =>
-  fetch(CONTEST_UPDATE, {
+  fetchInternalApi(CONTEST_UPDATE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -54,7 +55,7 @@ export const updateVirtualContestItems = (
   contestId: string,
   problems: VirtualContestItem[]
 ) =>
-  fetch(CONTEST_ITEM_UPDATE, {
+  fetchInternalApi(CONTEST_ITEM_UPDATE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -69,7 +70,7 @@ export const updateVirtualContestItems = (
   }).then((response) => response);
 
 export const joinContest = (contestId: string) =>
-  fetch(CONTEST_JOIN, {
+  fetchInternalApi(CONTEST_JOIN, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -78,7 +79,7 @@ export const joinContest = (contestId: string) =>
   }).then(() => ({}));
 
 export const leaveContest = (contestId: string) =>
-  fetch(CONTEST_LEAVE, {
+  fetchInternalApi(CONTEST_LEAVE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -16,24 +16,15 @@ production backend server, you don't need to run the backend applications in mos
      `http://localhost:8080/internal-api/authorize`.
 1. Launch an instance of [**PostgreSQL**](https://www.postgresql.org/) database on your machine.
 
-## Modifying Files
+## Environment Variables
 
-> To prevent accidentally committing the changes below, you may want to ignore
-> these files locally before editing them by adding the paths of these files to
-> the `$GIT_DIR/info/exclude` file, if you do not intend to commit changes in
-> these files. (`$GIT_DIR` is usually the `.git` folder.)
-
-Below are the list of files you need to modify:
-
-- `atcoder-problems-backend/src/server/endpoint/internal_api/mod.rs`: change `REDIRECT_URL` to `http://localhost:3000/atcoder/`
-  for your backend to redirect to your frontend web app after logging in.
-- `atcoder-problems-frontend/src/setupProxy.js`: change `target` to `http://localhost:8080`
-  **and** remove the `pathRewrite` section for your frontend web app to use your
-  backend server.
-- `atcoder-problems-frontend/src/utils/Url.tsx`: change `CLIENT_ID` to the client ID of your GitHub app
-  **and** change `AUTHORIZATION_CALLBACK_URL` to `http://localhost:8080/internal-api/authorize`.
-
-**Be careful** not to commit these files to the Git repository.
+- `SQL_URL` or `DATABASE_URL`: PostgreSQL connection URL
+- `PORT`: server port (default: `8080`)
+- `CLIENT_ID`: GitHub OAuth client ID
+- `CLIENT_SECRET`: GitHub OAuth client secret
+- `FRONTEND_REDIRECT_URL`: URL to redirect to after OAuth (default: `https://kenkoooo.com/atcoder/`)
+- `CORS_ALLOW_ORIGINS`: comma separated allowed origins for CORS when using cross-origin frontend
+  - example: `https://kkmia417.github.io,https://example.com`
 
 ## Build
 
@@ -48,6 +39,8 @@ docker-compose exec backend-development cargo build
 export SQL_URL=... # Connection URL of PostgreSQL
 export CLIENT_ID=... # GitHub client_id, which is required to use the login function.
 export CLIENT_SECRET=... # GitHub client_secret, which is required to use the login function.
+export FRONTEND_REDIRECT_URL=http://localhost:3000/ # Frontend URL after login
+export CORS_ALLOW_ORIGINS=http://localhost:3000 # Comma separated origins
 
 # Run backend server
 cargo run --bin run_server
@@ -66,6 +59,8 @@ cargo run --bin delta_update
 cargo run --bin dump_json
 cargo run --bin fix_invalid_submissions
 ```
+
+When `run_server` starts, it automatically creates required `internal_*` tables if they do not exist.
 
 ## Test
 

@@ -4,9 +4,10 @@ import {
   LIST_ITEM_UPDATE,
   LIST_UPDATE,
 } from "../ApiUrl";
+import { fetchInternalApi } from "../../../api/InternalAPIFetch";
 
 export const updateProblemList = (name: string, listId: string) =>
-  fetch(LIST_UPDATE, {
+  fetchInternalApi(LIST_UPDATE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +16,7 @@ export const updateProblemList = (name: string, listId: string) =>
   });
 
 export const addProblemItem = (problemId: string, listId: string) =>
-  fetch(LIST_ITEM_ADD, {
+  fetchInternalApi(LIST_ITEM_ADD, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +28,7 @@ export const addProblemItem = (problemId: string, listId: string) =>
   });
 
 export const deleteProblemItem = (problemId: string, listId: string) =>
-  fetch(LIST_ITEM_DELETE, {
+  fetchInternalApi(LIST_ITEM_DELETE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -43,7 +44,7 @@ export const updateProblemItem = (
   memo: string,
   listId: string
 ) =>
-  fetch(LIST_ITEM_UPDATE, {
+  fetchInternalApi(LIST_ITEM_UPDATE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

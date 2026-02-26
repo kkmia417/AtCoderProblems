@@ -16,6 +16,7 @@ import {
   Spinner,
 } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
+import { fetchInternalApi } from "../../api/InternalAPIFetch";
 import { useMyList } from "../../api/InternalAPIClient";
 import { LIST_CREATE, LIST_DELETE } from "./ApiUrl";
 
@@ -24,7 +25,7 @@ interface CreateListResponse {
 }
 
 const createNewList = () =>
-  fetch(LIST_CREATE, {
+  fetchInternalApi(LIST_CREATE, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ list_name: "New List" }),
@@ -33,7 +34,7 @@ const createNewList = () =>
     .then((response) => response as CreateListResponse);
 
 const deleteList = (internalListId: string) =>
-  fetch(LIST_DELETE, {
+  fetchInternalApi(LIST_DELETE, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ internal_list_id: internalListId }),
